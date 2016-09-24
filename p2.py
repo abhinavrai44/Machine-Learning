@@ -18,10 +18,7 @@ from sklearn.neural_network import BernoulliRBM
 from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
 
 from sklearn.decomposition import PCA
-##############################################################################
-### features_list is a list of strings, each of which is a feature name      #
-### first feature must be "poi", as this will be singled out as the label    #
-##############################################################################
+
 features_list = []
                  
 email_features_list = ['to_messages', 'from_poi_to_this_person',
@@ -84,24 +81,8 @@ my_dataset = addFeature.get_current_data_dict()
 
 
 ### these two lines extract the features specified in features_list
-### and extract them from data_dict, returning a numpy array
 data = featureFormat(my_dataset, features_list)
 
-
-
-
-
-
-
-
-### if you are creating new features, could also do that here
-
-
-##############################################################################
-### split into labels and features (this line assumes that the first         #
-### feature in the array is the label, which is why "poi" must always        #
-### be first in features_list                                                #
-##############################################################################
 
 labels, features = targetFeatureSplit(data)
 
@@ -318,16 +299,8 @@ print "Precision Avg: ", sum(precision_avg)/n_iter
 print "Recall Avg: ", sum(recall_avg)/n_iter
 
 
-
-
 features_list = new_features_list
 data_dict = my_dataset
-
-
-####################################################################
-### dump your classifier, dataset and features_list so             #
-### anyone can run/check your results                              #
-####################################################################
 
 pickle.dump(clf, open("my_classifier.pkl", "w") )
 pickle.dump(data_dict, open("my_dataset.pkl", "w") )
